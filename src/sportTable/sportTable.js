@@ -37,7 +37,7 @@ class SportTable extends Component {
 			<div className="row table-wrapper">
 				<div>
 					<h1>Sport Table</h1>
-					<div className = "col-12 sport-table">
+					<div className = "sport-table">
 						<div className="sport-table-header">
 							<div className = "col-2 table-header-text">Date</div>
 							<div className = "col-2 table-header-text">Sport Name</div>
