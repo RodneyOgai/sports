@@ -1,0 +1,68 @@
+.sport-container .item {
+	color: #fff;
+	margin: 0;
+	font-size: 20px;
+	width: 100%;
+	border-bottom: 1px solid #fff;
+	overflow-x: hidden; 
+}
+
+.sport-container-header {
+	border: 1px solid green;
+	background-color: yellow;
+}
+
+.sport-container-header h1 {
+	text-align: center;
+}
+
+.sport-container .item:last-child {
+	border-bottom: none;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	margin-bottom: 0 !important;
+}
+
+ul li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.sport{
+	background-color: green;
+	cursor: pointer;
+}
+
+.country-wrapper {
+}
+
+.country {
+	background-color: red;
+}
+
+.league {
+	background-color: blue;
+}
+
+.teams {
+	background-color: yellow;
+	color: #000 !important;
+}
+
+.item-sports {
+	display: inline-flex;
+	width: 100%;
+	justify-content: space-between;
+	-ms-align-items: center;
+	align-items: center;
+	/*padding: 15px;*/
+}
+
+.checkbox {
+	width: 20px;
+	display: inline-flex;
+}
