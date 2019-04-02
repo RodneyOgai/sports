@@ -1,0 +1,17 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#root {
+	width: 20%;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+#table {
+	width: 80%;
+	margin: 0;
+	padding: 0;
+}
