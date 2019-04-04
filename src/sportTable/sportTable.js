@@ -2,18 +2,18 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {render} from 'react-dom'
 import './sportTable.css'
-import SportInfo from '.././sportTree/sportTree'
+import Sport from '.././sportTree/sportTree'
 
 class SportTable extends Component {
 	state = {
-		date : null,
+		date : '2014-10-10',
 		events : [],
 	}
 	componentDidMount(){
 		axios
 	    .get("https://www.thesportsdb.com/api/v1/json/1/eventsday.php", {
 	    	params : {
-	    		d : '2014-10-10',
+	    		d : this.state.date,
 	    	}
 		})
 		 .then(rez => {
@@ -22,6 +22,9 @@ class SportTable extends Component {
 				events: this.state.events
 			})
 		 })
+	}
+	getAlert() {
+
 	}
 	render() {
 		const sportEventsInfo = this.state.events.map((event, index) => (

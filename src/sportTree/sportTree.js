@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {render} from 'react-dom'
 import './sportTree.css'
 import axios from 'axios' 
+import SportTable from '.././sportTable/sportTable'
 
 
 class Sport extends Component {
@@ -46,11 +47,13 @@ class Sport extends Component {
 	render() {
 		// this.openClose = this.openClose.bind(this);
 		const treeHeader = <div><span>Choose Data: </span><input type="date" /></div>;
+		// const sportListsItem = this.state.sportsList.sports;
+		// console.log(sportListsItem);
 		const sportLists = this.state.sportsList.sports.map(sport => 
 				        	<li key={sport.idSport} className="sport item">
 				        		<span className="item-sports"  onClick={() => this.openClose(sport)}>
 					        		{sport.strSport}
-					        		<input type="checkbox" className="checkbox"/>
+					        		<input type="checkbox" className="checkbox" />
 				        		</span>
 								{sport.isOpen && <div className="sport-container">
 									<ul className="country-wrapper">
@@ -165,15 +168,12 @@ class Sport extends Component {
 							})
 		      			})
 					})
-					country.isOpen = !country.isOpen;
-					this.setState({
-						isOpen: country.isOpen
-					})
 	    		} else {
 	    			this.state.sportsList.leagues = [];
 	    		}
 			})
 		}
+
 	openClose(sport){
 		var currentSport = sport;
 		console.log(sport);
