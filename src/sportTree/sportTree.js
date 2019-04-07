@@ -3,10 +3,14 @@ import {render} from 'react-dom'
 import './sportTree.css'
 import axios from 'axios' 
 import SportTable from '.././sportTable/sportTable'
+import moment from "moment"
 
 
 class Sport extends Component {
-	state = {
+	constructor(props) {
+		super(props)
+		this.state = { 
+		date: props.date,
 		sportsList : {
 			sports: [],
 			countries: [
@@ -27,7 +31,9 @@ class Sport extends Component {
 			teams: []
 		},
 		isOpen: false,
-	};
+		}
+	}
+
 	componentDidMount() {
     axios
       .get("https://www.thesportsdb.com/api/v1/json/1/all_sports.php")
@@ -42,13 +48,13 @@ class Sport extends Component {
 	      		return  this.state.sportsList.sports;
 	      })
       })
-
     }
 	render() {
-		// this.openClose = this.openClose.bind(this);
-		const treeHeader = <div><span>Choose Data: </span><input type="date" /></div>;
-		// const sportListsItem = this.state.sportsList.sports;
-		// console.log(sportListsItem);
+		const treeHeader = <div><span>Choose Data: </span><input 
+			type="date" 
+			defaultValue={this.state.date} 
+			onChange={(event) => this.props.updateDate(event)}
+			className="input-date"/></div>;
 		const sportLists = this.state.sportsList.sports.map(sport => 
 				        	<li key={sport.idSport} className="sport item">
 				        		<span className="item-sports"  onClick={() => this.openClose(sport)}>
@@ -196,9 +202,6 @@ class Sport extends Component {
 	}
 }
 
-class SportInfo extends Component {
-
-}
 
 
 export default Sport
