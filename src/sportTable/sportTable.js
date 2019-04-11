@@ -13,29 +13,17 @@ class SportTable extends Component {
 			events: props.events
 		}
 	}
-	// componentDidMount(){
-	// 	axios
-	//     .get("https://www.thesportsdb.com/api/v1/json/1/eventsday.php", {
-	//     	params : {
-	//     		d : this.props.date,
-	//     	}
-	// 	})
-	// 	 .then(rez => {
-	// 	 	this.state.events = rez.data.events;
-	// 	 	this.setState({
-	// 			events: this.state.events
-	// 		})
-	// 	 })
-	// }
 	render() {
 		const sportEventsInfo = this.props.events.map((event, index) => (
-			<div key={index} className="row">
-				<div className="col-2 sport-table-item">{event.dateEvent}</div>
-				<div className="col-2 sport-table-item">{event.strSport}</div>
-				<div className="col-2 sport-table-item">{event.strLeague}</div>
-				<div className="col-2 sport-table-item">{event.strEvent}</div>
-				<div className="col-2 sport-table-item">{event.intHomeScore}</div>
-				<div className="col-2 sport-table-item">{event.intAwayScore}</div>
+			<div key={index}>
+				<div className="row">
+					<div className="col-2 sport-table-item">{moment(event.dateEvent).format('DD MMM YYYY')}</div>
+					<div className="col-2 sport-table-item">{event.strSport}</div>
+					<div className="col-2 sport-table-item">{event.strLeague}</div>
+					<div className="col-2 sport-table-item">{event.strEvent}</div>
+					<div className="col-2 sport-table-item">{event.intHomeScore}</div>
+					<div className="col-2 sport-table-item">{event.intAwayScore}</div>
+				</div>
 			</div>));
 		return (
 			<div className="row table-wrapper">

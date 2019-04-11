@@ -10,28 +10,47 @@ class Sport extends Component {
 	constructor(props) {
 		super(props)
 		this.state = { 
-		date: props.date,
-		sportsList : {
-			sports: [],
-			countries: [
-				{
-					name: 'Russia',
-					isOpen: false
-				},
-				{
-					name: 'England',
-					isOpen: false
-				},
-				{
-					name: 'Germany',
-					isOpen: false
-				}
-			],
+			events: props.events,
+			checked: props.checked,
+			date: props.date,
+			sportsList : {
+				sports: [],
+				countries: [
+					{
+						name: 'Russia',
+						isOpen: false
+					},
+					{
+						name: 'England',
+						isOpen: false
+					},
+					{
+						name: 'Germany',
+						isOpen: false
+					}
+				],
 			leagues: [],
-			teams: []
+			teams: [],
 		},
 		isOpen: false,
+		isChecked: false,
+		checkedSports: [],
 		}
+	}
+
+	sportsChecked(sport, events) {
+		var currentSport = sport;
+		currentSport.isChecked = !currentSport.isChecked;
+		if(currentSport.isChecked === true) {
+			this.state.checkedSports.push(currentSport);
+		} else {
+			this.state.checkedSports.map((sport , index) => {
+				if(sport === currentSport) {
+					this.state.checkedSports.splice(index);
+				}
+			});
+		}
+		this.props.handleChangeChecked(this.state.checkedSports, events);
 	}
 
 	componentDidMount() {
@@ -41,6 +60,7 @@ class Sport extends Component {
       	this.state.sportsList.sports = rez.data.sports;
       	this.setState(this.state.sportsList.sports);
 	      this.state.sportsList.sports.map(sport => {
+	      		sport.isChecked = this.state.isChecked;
 	      		sport.countries = this.state.sportsList.countries;
 	      		sport.countries.map(country => {
 	      			country.leagues = this.state.sportsList.leagues;
@@ -59,7 +79,7 @@ class Sport extends Component {
 				        	<li key={sport.idSport} className="sport item">
 				        		<span className="item-sports"  onClick={() => this.openClose(sport)}>
 					        		{sport.strSport}
-					        		<input type="checkbox" className="checkbox" />
+					        		<input type="checkbox" defaultChecked={sport.isChecked} onChange={() => this.sportsChecked(sport, this.props.events)} className="checkbox" />
 				        		</span>
 								{sport.isOpen && <div className="sport-container">
 									<ul className="country-wrapper">
@@ -67,7 +87,7 @@ class Sport extends Component {
 											<li key={index} className="country item">
 											 		<span className="item-sports"  onClick={() => this.getLeagues(sport, country)}>
 											 			{country.name}
-											 		<input type="checkbox" className="checkbox"/>
+											 		{/*<input type="checkbox" className="checkbox"/>*/}
 											 	</span>
 											 	{country.isOpen && <div className="sport-container">
 													<ul className="country-wrapper">
@@ -83,7 +103,7 @@ class Sport extends Component {
 																			<li key={index} className="teams item">
 																			 		<span className="item-sports">
 																			 			{team.strTeam}
-																			 		<input type="checkbox" className="checkbox"/>
+																			 		{/*<input type="checkbox" className="checkbox"/>*/}
 																			 	</span>
 																			</li>
 																			)}
@@ -99,16 +119,19 @@ class Sport extends Component {
 								</div> }
 				        	</li>);
 		return (
-			<div className="sport-container">
-				<div className="sport-container-header">
-					{treeHeader}
-				</div>
-				<div>
+			<div className="sport-tree-wrapper">
+				<div className="sport-container">
+					<div className="sport-container-header">
+						{treeHeader}
+					</div>
+					<div>
 					 <ul>
 					 	{sportLists}
 				      </ul>
+					</div>
 				</div>
 			</div>
+			
 		)
 	}
 

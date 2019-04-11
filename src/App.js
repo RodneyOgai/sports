@@ -21,9 +21,11 @@ class App extends Component {
 		super(props);
 		this.state = {
 			date: moment(new Date()).format("YYYY-MM-DD"),
-			events: []
+			events: [],
+			// isChecked: false,
 		};
 		this.updateDate = this.updateDate.bind(this);
+		this.handleChangeChecked = this.handleChangeChecked.bind(this);
 	}
 
 	componentDidMount(){
@@ -35,9 +37,54 @@ class App extends Component {
 		})
 		 .then(rez => {
 		 	this.state.events = rez.data.events;
+		 	this.state.events.map(event => {
+		 		event.isChecked = true;
+		 	});
 		 	this.setState({
 				events: this.state.events
 			})
+		 })
+	}
+
+	handleChangeChecked(sports, events) {
+		var events = events;
+		var checkedEvents = [];
+		var sports = sports;
+		console.log(sports);
+		axios
+	    .get("https://www.thesportsdb.com/api/v1/json/1/eventsday.php", {
+	    	params : {
+	    		d : this.state.date,
+	    	}
+		})
+		 .then(rez => {
+		 	this.state.events = rez.data.events;
+		 	sports.map(sport => {
+				this.state.events.map(event => {
+				if(sport.isChecked === true) {
+					event.isChecked = false;
+						if(event.strSport === sport.strSport) {
+							event.isChecked = true;
+			 				checkedEvents.push(event);
+						}
+			 		} else {
+			 			event.isChecked = true;
+			 			checkedEvents.push(event);
+			 		}
+				});
+		 	});
+		 	
+			if(sports.length > 0) {
+				this.state.events = checkedEvents;
+				this.setState({
+					events: checkedEvents
+				})
+			} else {
+				this.setState({
+					events: this.state.events
+				})
+			}
+		 	
 		 })
 	}
 
@@ -65,10 +112,14 @@ class App extends Component {
 		return (
 			<div>
 				<SportWrapper>
-					<Sport updateDate={this.updateDate} date={this.state.date}/>
+					<Sport isChecked={this.state.isChecked} 
+							events={this.state.events} 
+							handleChangeChecked={this.handleChangeChecked} 
+							updateDate={this.updateDate} 
+							date={this.state.date}/>
 				</SportWrapper>
 				<SportTableWrapper>
-					<SportTable updateDate={this.updateDate} events={this.state.events} date={this.state.date}/>
+					<SportTable handleChangeChecked={this.handleChangeChecked} updateDate={this.updateDate} events={this.state.events} date={this.state.date}/>
 				</SportTableWrapper>
 			</div>
 		)

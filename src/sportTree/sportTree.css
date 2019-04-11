@@ -5,11 +5,31 @@
 	width: 100%;
 	border-bottom: 1px solid #fff;
 	overflow-x: hidden; 
+	font-family: 'Poppins', sans-serif;
+	-webkit-box-shadow: 4px 4px 16px 0px rgba(50, 50, 50, 0.65);
+	-moz-box-shadow:    4px 4px 16px 0px rgba(50, 50, 50, 0.65);
+	box-shadow:         4px 4px 16px 0px rgba(50, 50, 50, 0.65);
 }
 
+.sport-tree-wrapper {
+	max-height: 900px;
+	overflow-y: scroll;
+}
+
+.sport-tree-wrapper::-webkit-scrollbar { width: 0; }
+.sport-tree-wrapper{ -ms-overflow-style: none; }
+.sport-tree-wrapper{ overflow: -moz-scrollbars-none; }
+
 .sport-container-header {
-	border: 1px solid green;
-	background-color: yellow;
+	border: 1px solid #4ecb74;
+	background-color: #bcf979;
+	font-family: 'Poppins', sans-serif;
+	font-size: 18px;
+}
+
+.input-date {
+	font-size: 16px;
+	width: 100%;
 }
 
 input[type='number'] {
@@ -51,23 +71,20 @@ ul li {
 }
 
 .sport{
-	background-color: green;
+	background-color: #4ecb74;
 	cursor: pointer;
 }
 
-.country-wrapper {
-}
-
 .country {
-	background-color: red;
+	background-color: #39a459;
 }
 
 .league {
-	background-color: blue;
+	background-color: #2a7540;
 }
 
 .teams {
-	background-color: yellow;
+	background-color: #d3fca6;
 	color: #000 !important;
 }
 

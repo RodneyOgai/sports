@@ -13,6 +13,7 @@
 	max-height: 800px;
 	overflow-y: scroll;
 	padding-right: 50px; 
+	background-color: #d3fca6;
 }
 
 .table-sport::-webkit-scrollbar { width: 0; }
@@ -23,6 +24,8 @@
 	text-align: center;
 	/*border: 1px solid #000;*/
 	overflow: hidden;
+	font-size: 14px;
+	font-family: 'Poppins', sans-serif;
 }
 
 .sport-table-item {
