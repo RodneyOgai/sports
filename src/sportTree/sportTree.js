@@ -95,7 +95,7 @@ class Sport extends Component {
 															<li key={index} className="league item">
 															 		<span className="item-sports" onClick={() => this.getTeams(league)}>
 															 			{league.strLeague}
-															 		<input type="checkbox" className="checkbox"/>
+															 		{/*<input type="checkbox" className="checkbox"/>*/}
 															 	</span>
 															 	{league.isOpen && <div className="sport-container">
 																	<ul className="country-wrapper">

@@ -3,6 +3,7 @@ import {render} from 'react-dom'
 import Sport from './sportTree/sportTree'
 import styled from 'styled-components'
 import SportTable from './sportTable/sportTable'
+import Header from './header/header'
 import moment from "moment"
 import axios from "axios"
 
@@ -111,6 +112,7 @@ class App extends Component {
 	render() {
 		return (
 			<div>
+				<Header></Header>
 				<SportWrapper>
 					<Sport isChecked={this.state.isChecked} 
 							events={this.state.events} 
