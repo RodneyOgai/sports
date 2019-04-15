@@ -10,6 +10,7 @@ class Header extends Component {
 		super(props);
 		this.state = {
 			isAutorization : false,
+			isRegistration : false,
 		};
 		this.changeOpen = this.changeOpen.bind(this);
 	}
@@ -28,16 +29,31 @@ class Header extends Component {
 					{this.state.isAutorization && 
 						<Autorization changeOpen={this.changeOpen} isOpen={this.state.isAutorization} />
 					}
+					{this.state.isRegistration &&
+						<Registration changeOpen={this.changeOpen} isOpen={this.state.isAutorization} />}
 				</div>
 			</div>
 		)
 	}
-	changeOpen(isOpen) {
+	changeOpen(isOpen, message) {
 		isOpen = !isOpen;
-		this.setState({
-			isAutorization : isOpen,
-		});
-		console.log(isOpen);
+		if (message === 'autorization') {	
+			this.setState({
+				isAutorization : isOpen,
+				isRegistration : false
+			});
+		} else if (message === 'registration') {
+			this.setState({
+				isRegistration : isOpen,
+				isAutorization : false
+			});
+		} else if (message === 'close') {
+			this.setState({
+				isRegistration : false,
+				isAutorization : false
+			});
+		}
+		console.log(isOpen, message);
 	}
 }
 
@@ -51,15 +67,73 @@ class Buttons extends Component {
 	render() {
 		const buttons = <div>
 							<div>
-								<button className="autor-button" onClick={() => this.props.changeOpen(this.state.isOpen)}>Авторизоваться</button>
+								<button className="autor-button" onClick={() => this.props.changeOpen(this.state.isOpen, "autorization")}>Авторизоваться</button>
 							</div>
 							<div>
-								<button className="autor-button">Зарегистрироваться</button>
+								<button className="autor-button" onClick={() => this.props.changeOpen(this.state.isOpen, "registration")}>Зарегистрироваться</button>
 							</div>
 						</div> 
 		return(
 			<div>
 				{buttons}
+			</div>
+		)
+	}
+}
+
+class Registration extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			isOpen : props.isOpen,
+		}
+	}
+	render() {
+		const formRegistration = <div className="registration-form">
+									<form>
+										<i className="fa fa-close" onClick ={() => this.props.changeOpen(this.state.isOpen, 'close')} />
+										<div className="registration-wrapper">
+											<label>Username</label>
+											<div className="registration-input-wrapper">
+												<input className="autor-input" />
+											</div>
+										</div> 
+										<div className="registration-wrapper">
+											<label>Name</label>
+											<div className="registration-input-wrapper">
+												<input className="autor-input" />
+											</div>
+										</div> 
+										<div className="registration-wrapper">
+											<label>E-mail</label>
+											<div className="registration-input-wrapper">
+												<input className="autor-input" type="email" />
+											</div>
+										</div> 
+										<div className="registration-wrapper">
+											<label>Phone Number</label>
+											<div className="registration-input-wrapper">
+												<input className="autor-input" type="phone" />
+											</div>
+										</div> 
+										<div className="autor-wrapper">
+											<label>Password</label>
+											<div className="registration-input-wrapper">
+												<input className="autor-input" type="password" />
+											</div>
+										</div>
+										<div className="registration-wrapper">
+											<label>Repeat Password</label>
+											<div className="registration-input-wrapper">
+												<input className="autor-input" />
+											</div>
+										</div> 
+										<button className="registration-button">Отправить</button>
+									</form>
+								</div>;
+		return(
+			<div>
+				{formRegistration}
 			</div>
 		)
 	}
@@ -74,7 +148,7 @@ class Autorization extends Component {
 	}
 	render() {
 		const form = <div className="autorization">
-						<i className="fa fa-close" onClick ={() => this.props.changeOpen(this.state.isOpen)} />
+						<i className="fa fa-close" onClick ={() => this.props.changeOpen(this.state.isOpen, 'close')} />
 						<div className="autor-wrapper">
 							<label>Username</label>
 							<div className="autor-input-wrapper">

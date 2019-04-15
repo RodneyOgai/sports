@@ -7,6 +7,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	position: relative;
 }
 
 .logo {
@@ -61,7 +62,8 @@
 	top: 0;
 }
 
-.autor-button {
+.autor-button,
+.registration-button {
 	background-color: #bcf979;
 	color: #000;
 	border: none;
@@ -77,4 +79,18 @@
 	color: #fff;
 	top: 2%;
 	cursor: pointer;
+}
+
+.registration-form {
+	position: absolute;
+	max-width: 500px;
+	background-color: #4ecb74;
+	padding: 20px;
+	right: 10px;
+	z-index: 9999;
+}
+
+.registration-input-wrapper {
+	max-width: 300px;
+	width: 100%;
 }
